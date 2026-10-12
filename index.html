@@ -41,6 +41,16 @@
 .page-disclaimer{font-size:11px;line-height:1.8;color:#c5b6ce;text-align:center;margin:18px 0 22px;word-break:keep-all}
 @media(max-width:700px){.title-card{padding:12px}.title-card .hero-rabbit{width:36px;height:36px}.title-card h2{font-size:21px}.title-card p{font-size:10px}.start-card .fan-notice{font-size:9px;line-height:1.5;margin-top:9px}.unlock-hint{font-size:9px;margin:6px 0 9px}.unlock-panel{padding:13px;gap:11px}.unlock-panel strong{font-size:9px}.unlock-panel p{font-size:11px}.unlock-panel small{font-size:9px}.page-disclaimer{font-size:10px}.overlay{padding:10px}.shop-card>p{line-height:1.55}}
 
+/* Costume abilities and deliberate progress reset. */
+.cabinet-bottom{flex-wrap:wrap;gap:6px 12px}#costumeStatus{color:#dfc7f4;letter-spacing:0;font-size:9px}
+.skin-picker{flex-wrap:wrap;gap:5px}.skin-picker button{font-size:10px;padding:6px 8px}.costume-description{color:#ccebd5;font-size:10px;margin:0 0 10px}
+.touch.costume-special{grid-column:1/-1;display:flex;flex-direction:row;width:100%;height:39px;gap:8px;border-color:#bdb5eb;background:#c4b6ed;color:#403357;border-radius:6px;box-shadow:0 4px 0 #675781}
+.touch.costume-special strong{font-size:11px}.touch.costume-special>span{font-size:14px;opacity:1}.touch.costume-special .skill-key{font-size:10px;border:1px solid #675781;padding:1px 5px}.touch.costume-special.charging{background:#776586;color:#f1e9ff}.touch.costume-special:disabled{background:#40384d;color:#bbadca;border-color:#63536d;opacity:.65}
+.costume-guide{color:#d0bdec}.reset-button{color:#ffd4ba}.reset-dialog{width:min(390px,92vw);color:#f4eaf8;border:1px solid #a58ab0;border-radius:8px;background:#292238;padding:24px;box-shadow:0 20px 100px #0008}.reset-dialog::backdrop{background:#12101ece}.reset-dialog h2{font-size:20px;margin:0 0 12px;color:#ffe5b0}.reset-dialog p{font-size:13px;line-height:1.8;color:#d5c4df}.reset-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}.reset-actions button{min-width:0;padding:10px 15px;margin:0}.reset-actions .primary{background:#f4b0ac;border-color:#e8a494;box-shadow:0 4px 0 #a86f72}
+@media(max-width:700px){.touch-controls{row-gap:10px}.touch.costume-special{height:38px}.touch.costume-special strong{font-size:10px}.costume-description{font-size:9px;margin-bottom:8px}.skin-picker button{font-size:9px;padding:5px 7px}.title-card .hero-rabbit{width:30px;height:30px}.reset-dialog{padding:20px}.cabinet-bottom #best{display:none}}
+@media(max-width:390px){.cartridge{font-size:7px;letter-spacing:0;max-width:100px;line-height:1.5}.toolbar{gap:3px}.icon-button{padding:1px 5px}.reset-button span{margin-left:1px}}
+@media(max-height:560px) and (orientation:landscape){.arcade:fullscreen .touch.costume-special{grid-column:1;grid-row:2;align-self:start;justify-self:center;margin:12px 3px 0;width:calc(100% - 6px);height:auto;min-height:55px;padding:5px;flex-wrap:wrap}.arcade:fullscreen .touch.costume-special strong{font-size:9px}.arcade:fullscreen .touch.costume-special .skill-key{display:none}}
+
 </style>
 </head>
 <body>
@@ -48,7 +58,7 @@
   <main class="page">
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="우사기의 용산 오픈런 홈"><span class="brand-rabbit" aria-hidden="true">ᕱ⑅ᕱ</span> MIDNIGHT<span>ARCADE</span></a>
-      <span class="edition"><span class="live-dot"></span> FAN-MADE / VOL. 04</span>
+      <span class="edition"><span class="live-dot"></span> FAN-MADE / VOL. 05</span>
     </header>
     <section class="heading">
       <div><div class="eyebrow"><span>YONGSAN, SEOUL</span><span class="eyebrow-line"></span><span>00:30 AM</span></div>
@@ -57,27 +67,29 @@
       <div class="ticket" aria-label="목표: 첫 번째 입장"><span>OPEN-RUN PASS</span><strong>No. <b>001</b></strong><span class="ticket-bottom">우사기 님 · 굿즈 사수 작전</span></div>
     </section>
     <section class="arcade" aria-label="우사기 픽셀 액션 게임">
-      <div class="cabinet-bar"><div class="cartridge"><span class="pixel-star">✦</span> USAGI : MIDNIGHT RUN</div><div class="toolbar"><button id="sound" class="icon-button" aria-label="소리 끄기" aria-pressed="true">♪ <span>ON</span></button><button id="pause" class="icon-button" aria-label="일시정지" disabled>Ⅱ</button><button id="fullscreen" class="icon-button" aria-label="전체 화면">⛶</button></div></div>
+      <div class="cabinet-bar"><div class="cartridge"><span class="pixel-star">✦</span> USAGI : MIDNIGHT RUN</div><div class="toolbar"><button id="sound" class="icon-button" aria-label="소리 끄기" aria-pressed="true">♪ <span>ON</span></button><button id="pause" class="icon-button" aria-label="일시정지" disabled>Ⅱ</button><button id="resetProgress" class="icon-button reset-button" aria-label="모든 게임 기록 초기화">↺ <span>초기화</span></button><button id="fullscreen" class="icon-button" aria-label="전체 화면">⛶</button></div></div>
       <div class="game-hud"><div class="health-group"><span class="hud-label">우사기 체력</span><span id="hearts" aria-label="체력 6 / 6">♥ ♥ ♥ ♥ ♥ ♥</span></div><div class="stage-group"><span class="hud-label" id="stageLabel">STAGE 01 · 밤샘 대기</span><span class="progress-track"><span id="progress"></span></span></div><div class="wallet"><span class="coin-icon">C</span><strong id="coins">0</strong><span class="hud-label">COINS</span></div></div>
       <div class="screen" id="screen">
-        <canvas id="game" width="480" height="270" tabindex="0" aria-label="우사기 게임 화면. 방향키로 이동, 스페이스로 점프, J로 주먹, K로 대시. 토벌봉을 주운 뒤 L로 불구름 공격. 모바일은 아래 터치 버튼을 이용하세요."></canvas>
+        <canvas id="game" width="480" height="270" tabindex="0" aria-label="우사기 게임 화면. 방향키 또는 A D로 이동, W나 스페이스로 점프, S나 K로 대시, J로 주먹, E로 코스튬 기술. 토벌봉을 주운 뒤 L로 불구름 공격. 모바일은 아래 터치 버튼을 이용하세요."></canvas>
         <div class="scene-top"><span id="location">용산역 · 00:30</span><span id="goal">목표: 치이카와 샵 첫 입장</span></div>
         <div id="toast" class="toast" role="status" aria-live="polite"></div>
         <div id="overlay" class="overlay"></div>
         <div class="screen-corner corner-left" aria-hidden="true"></div><div class="screen-corner corner-right" aria-hidden="true"></div>
       </div>
-      <div class="cabinet-bottom"><span><i class="live-dot"></i> <span id="gameStatus">READY, USAGI?</span></span><span id="skillStatus">토벌봉 · 보스전에서 등장</span><span id="best">BEST —</span></div>
+      <div class="cabinet-bottom"><span><i class="live-dot"></i> <span id="gameStatus">READY, USAGI?</span></span><span id="skillStatus">토벌봉 · 보스전에서 등장</span><span id="costumeStatus">1회차 · MEDIUM+ · 공격 ×1</span><span id="best">BEST —</span></div>
       <div class="touch-controls" aria-label="모바일 게임 조작">
         <div class="move-controls"><button data-input="left" class="touch move" aria-label="왼쪽 이동">◀</button><button data-input="right" class="touch move" aria-label="오른쪽 이동">▶</button></div>
         <div class="action-controls"><button data-input="dash" class="touch dash" aria-label="대시">대시<span>K</span></button><button data-input="jump" class="touch jump" aria-label="점프">점프<span>↑</span></button><button data-input="punch" class="touch punch" aria-label="주먹 공격">주먹<span>J</span></button></div>
         <button id="skillButton" data-input="skill" class="touch special" aria-label="토벌봉을 먼저 획득하세요" disabled><span class="skill-flame" aria-hidden="true">✹</span><strong id="skillButtonText">토벌봉은 모몽가 보스전에서 등장</strong><span class="skill-key">L</span></button>
+        <button id="costumeButton" data-input="costume" class="touch costume-special" aria-label="코스튬 전용 기술 E" disabled><span aria-hidden="true">✦</span><strong id="costumeButtonText">코스튬 전용 기술</strong><span class="skill-key">E</span></button>
       </div>
+      <dialog id="resetDialog" class="reset-dialog" aria-labelledby="resetTitle" aria-describedby="resetDescription"><h2 id="resetTitle">1회차부터 다시 시작할까요?</h2><p id="resetDescription">굿즈 컬렉션, 코스튬, 누적 클리어 횟수와 최고 기록을 모두 지웁니다. 초기화하면 되돌릴 수 없어요.</p><div class="reset-actions"><button id="cancelReset" class="secondary" autofocus>취소</button><button id="confirmReset" class="primary">모든 기록 초기화</button></div></dialog>
     </section>
     <section class="below-game">
-      <div class="howto"><h2><span class="section-num">01</span> 오픈런 생존 가이드</h2><div class="key-guide"><span><kbd>←</kbd><kbd>→</kbd> 이동</span><span><kbd>Space</kbd> 점프</span><span><kbd>J</kbd> 주먹</span><span><kbd>K</kbd> 대시</span><span class="skill-guide"><kbd>L</kbd> 불구름</span><span><kbd>P</kbd> 일시정지</span></div><p><strong class="skill-copy">반짝이는 토벌봉은 모몽가 보스전에서 등장! 주먹의 3배 피해 · 2.2초 충전</strong><br>난이도 MEDIUM+ · 구역 돌파 시 체력 2칸 회복.<br>모몽가가 부르는 작은 모몽가는 주먹·불구름으로 막거나 대시로 피하세요.<br>♪ 버튼으로 첨부 BGM·효과음을 켜고 끌 수 있어요.</p></div>
+      <div class="howto"><h2><span class="section-num">01</span> 오픈런 생존 가이드</h2><div class="key-guide"><span><kbd>←</kbd><kbd>→</kbd> / <kbd>A</kbd><kbd>D</kbd> 이동</span><span><kbd>↑</kbd><kbd>W</kbd><kbd>Space</kbd> 점프</span><span><kbd>↓</kbd><kbd>S</kbd><kbd>K</kbd> 대시</span><span><kbd>J</kbd> 주먹</span><span class="skill-guide"><kbd>L</kbd> 불구름</span><span class="costume-guide"><kbd>E</kbd> 코스튬 기술</span><span><kbd>P</kbd> 일시정지</span></div><p>PC는 방향키와 WASD 모두 지원합니다. 모바일은 아래 터치 버튼을 사용하세요.<br><strong class="skill-copy">반짝이는 토벌봉은 모몽가 보스전에서 등장! 주먹의 3배 피해 · 2.2초 충전</strong><br>1~3회차 MEDIUM+ · 4회차부터 HARD (적 체력 3배, 더 빠른 공격).<br>구역 돌파 시 기본 2칸 / HARD 1칸 회복. 두 코스튬은 4회차부터 모든 공격 피해 3배.<br>롭이어: E 회전 몸통박치기 (3.5초 충전) · 맥도날드: E 감자튀김 (3초 충전).<br>모몽가가 부르는 작은 모몽가는 주먹·불구름으로 막거나 대시로 피하세요.<br>♪ 소리 설정 · 상단 ↺ 초기화로 기록을 지우고 1회차부터 다시 시작할 수 있어요.</p></div>
       <div class="collectibles"><h2><span class="section-num">02</span> 나의 굿즈 컬렉션 <span class="collection-count" id="collectionCount">0 / 3</span></h2><div class="item-row"><div class="item-preview" data-item="popcorn"><canvas width="64" height="64" data-art="popcorn" aria-label="우사기 팝콘통"></canvas><div><strong>팝콘통</strong><span>40 C</span></div></div><div class="item-preview" data-item="figure"><canvas width="64" height="64" data-art="figure" aria-label="우사기 피규어"></canvas><div><strong>피규어</strong><span>40 C</span></div></div><div class="item-preview" data-item="keyring"><canvas width="64" height="64" data-art="keyring" aria-label="훌라 우사기 키링"></canvas><div><strong>훌라 키링</strong><span>40 C</span></div></div></div></div>
     </section>
-    <div class="unlock-panel"><span class="reward-badge">M</span><div><strong>COLLECTION REWARD · 맥도날드 우사기</strong><p id="unlockStatus">굿즈 3종을 모으면 다음 게임부터 플레이할 수 있어요.</p><small>회차별 총 40 C · 굿즈 각 40 C · 같은 기기·브라우저에 자동 저장</small></div></div>
+    <div class="unlock-panel"><span class="reward-badge">M</span><div><strong>COLLECTION REWARD · 맥도날드 & 롭이어</strong><p id="unlockStatus">굿즈 3종을 모으면 4회차부터 두 코스튬과 전용 기술을 선택할 수 있어요.</p><small>회차별 총 40 C · 굿즈 각 40 C · 같은 기기·브라우저에 자동 저장</small></div></div>
     <p class="page-disclaimer">본 게임은 비공식 팬게임이며, 원작자(Nagano) 및 치이카와 공식 제작사와 관련이 없습니다</p>
     <footer><span>작은 토끼의 커다란 굿즈 사수 작전 <span class="footer-star">✧</span></span><span>비공식 팬 게임 · 실제 장소·인물과 무관한 코믹 픽션</span></footer>
   </main>
@@ -99,6 +111,7 @@ window.Art = (() => {
   momongaSprite.src=window.GAME_ASSETS.momonga;
   const ready=Promise.all([usagiReady,momongaReady]);
   function usagi(c,x,y,scale=1,opts={}){
+    if(opts.skin==='lop'){lopUsagi(c,x,y,scale,opts);return}
     if(spriteLoaded){
       c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale*(opts.face||1),scale);
       if(opts.shadow!==false){c.save();c.globalAlpha*=.2;c.fillStyle='#18121c';c.beginPath();c.ellipse(0,1,19,3,0,0,Math.PI*2);c.fill();c.restore()}
@@ -109,11 +122,11 @@ window.Art = (() => {
       c.drawImage(sprite,257,88,722,1051,-25,-73,50,73);
       c.imageSmoothingEnabled=false;
       if(opts.skin==='mcd')uniform(c);
-      if(opts.punch){
+      if(opts.punch&&!opts.staff){
         c.lineCap='round';c.strokeStyle='#1a1216';c.lineWidth=8;c.beginPath();c.moveTo(19,-21);c.lineTo(35,-24);c.stroke();c.strokeStyle='#f8edc5';c.lineWidth=5;c.stroke();
         c.fillStyle='#f8edc5';c.strokeStyle='#1a1216';c.lineWidth=1.5;c.beginPath();c.ellipse(36,-24,5,5,0,0,Math.PI*2);c.fill();c.stroke();
       }
-      if(opts.staff)staff(c,12+(opts.cast?4:0),-23,.9,{held:true});
+      if(opts.staff)heldStaff(c,19,-16,opts);
       c.restore();c.restore();return;
     }
     c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale*(opts.face||1),scale);
@@ -144,6 +157,7 @@ window.Art = (() => {
     if(opts.punch){rect(c,17,-26,16,8,C.ink);rect(c,19,-24,15,4,C.cream);rect(c,30,-29,10,13,C.ink);rect(c,32,-27,8,9,C.light)}
     else{rect(c,-18,-17,5,6,C.ink);rect(c,-17,-17,4,3,C.cream);rect(c,13,-17,5,6,C.ink);rect(c,13,-17,4,3,C.cream)}
     if(opts.skin==='mcd')uniform(c);
+    if(opts.staff)heldStaff(c,15,-15,opts);
     if(hop){rect(c,-4,-20,7,3,C.pink)}
     c.restore();
   }
@@ -243,7 +257,7 @@ window.Art = (() => {
     c.lineCap='round';c.lineJoin='round';c.strokeStyle='#312227';c.lineWidth=9;c.beginPath();c.moveTo(-35,0);c.quadraticCurveTo(4,9,40,-4);c.stroke();
     c.strokeStyle='#f2bd62';c.lineWidth=6;c.stroke();c.strokeStyle='#ffe1a4';c.lineWidth=2;c.beginPath();c.moveTo(-29,-1);c.quadraticCurveTo(3,6,37,-5);c.stroke();
     c.lineWidth=9;c.strokeStyle='#312227';c.beginPath();c.moveTo(35,-3);c.lineTo(44,-5);c.stroke();c.lineWidth=6;c.strokeStyle='#fff6e7';c.stroke();
-    if(opts.held){c.fillStyle='#f8edc5';c.strokeStyle='#211820';c.lineWidth=1.5;c.beginPath();c.ellipse(-7,3,3,5,.1,0,Math.PI*2);c.fill();c.stroke()}
+    // The wielder owns the hand: never add a detached third hand to the prop.
     c.restore();
   }
   function fireCloud(c,x,y,age=0,face=1){
@@ -425,7 +439,43 @@ window.Art = (() => {
     let x=4330-cam;if(x<W+50&&x>-170){rect(c,x,g-136,140,136,'#896a94');rect(c,x+5,g-130,130,130,'#f6c9d9');rect(c,x+11,g-100,118,100,'#554663');rect(c,x+18,g-94,105,94,'#aa9fc0');rect(c,x+67,g-94,3,94,'#ead9e6');rect(c,x+54,g-53,5,14,'#ffe8af');c.fillStyle='#59445c';c.textAlign='center';c.font='bold 11px monospace';c.fillText('10:00 OPEN',x+70,g-112)}
   }
 
-  return{C,rect,poly,usagi,momonga,cuteMomonga,enemy,goods,star,staff,fireCloud,world,ready};
+
+  function heldStaff(c,x,y,opts={}){
+    // Pivot at the existing right paw; the grip is painted on that same paw.
+    c.save();c.translate(x,y);c.rotate(opts.cast?-.38:opts.punch?-.24:-.07);
+    staff(c,5,-2,.8,{held:true});
+    c.fillStyle='#f8edc5';c.strokeStyle='#171115';c.lineWidth=1.1;
+    c.beginPath();c.ellipse(0,0,2.7,3.1,0,0,Math.PI*2);c.fill();c.stroke();c.restore();
+  }
+  function lopUsagi(c,x,y,scale=1,o={}){
+    c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale*(o.face||1),scale);
+    if(o.shadow!==false){c.save();c.globalAlpha*=.2;c.fillStyle='#18121c';c.beginPath();c.ellipse(0,1,20,3,0,0,Math.PI*2);c.fill();c.restore()}
+    const bob=o.walk?Math.abs(Math.sin(o.walk))*1.7:0;
+    c.translate(0,-bob);if(o.walk)c.rotate(Math.sin(o.walk)*.04);
+    c.strokeStyle='#181318';c.fillStyle='#faedc3';c.lineWidth=1.8;c.lineCap='round';c.lineJoin='round';
+    // Long soft ears hang down both sides, as in the supplied reference.
+    for(const side of [-1,1]){c.save();c.scale(side,1);c.beginPath();c.moveTo(12,-48);c.bezierCurveTo(24,-48,27,-34,33,-27);c.bezierCurveTo(43,-17,42,-11,35,-12);c.bezierCurveTo(29,-13,25,-23,20,-29);c.closePath();c.fill();c.stroke();c.restore()}
+    c.beginPath();c.moveTo(-13,-24);c.quadraticCurveTo(-17,-13,-10,-5);c.lineTo(-6,-3);c.quadraticCurveTo(-6,3,-2,1);c.lineTo(0,-2);c.lineTo(4,-2);c.quadraticCurveTo(4,3,8,1);c.lineTo(10,-5);c.quadraticCurveTo(19,-12,13,-24);c.closePath();c.fill();c.stroke();
+    c.beginPath();c.moveTo(0,-53);c.bezierCurveTo(21,-53,27,-37,25,-26);c.bezierCurveTo(24,-17,12,-18,0,-17);c.bezierCurveTo(-15,-17,-26,-18,-26,-28);c.bezierCurveTo(-26,-41,-17,-53,0,-53);c.closePath();c.fill();c.beginPath();c.moveTo(-15,-18);c.bezierCurveTo(-24,-18,-26,-23,-26,-28);c.bezierCurveTo(-26,-41,-17,-53,0,-53);c.bezierCurveTo(21,-53,27,-37,25,-26);c.quadraticCurveTo(24,-18,15,-18);c.stroke();
+    c.lineWidth=1.6;c.beginPath();c.moveTo(-15,-39);c.quadraticCurveTo(-14,-43,-8,-44);c.moveTo(7,-44);c.quadraticCurveTo(14,-43,16,-39);c.stroke();
+    for(const x of [-10,10]){c.fillStyle='#181318';c.beginPath();c.ellipse(x,-33,3.1,4.1,0,0,Math.PI*2);c.fill();c.fillStyle='#fffef7';c.beginPath();c.ellipse(x-.5,-34.7,1.6,1,0,0,Math.PI*2);c.fill();rect(c,x-1,-31.5,2,1,'#fffef7');c.fillStyle='#f7b7c7';c.beginPath();c.ellipse(x*1.65,-28,6,3.7,0,0,Math.PI*2);c.fill();for(let k=0;k<3;k++){c.beginPath();c.moveTo(x*1.65-3+k*2,-29);c.lineTo(x*1.65-4+k*2,-27);c.stroke()}}
+    c.beginPath();c.moveTo(-4,-28);c.quadraticCurveTo(-3,-24,0,-26);c.quadraticCurveTo(4,-24,4,-28);c.moveTo(0,-27);c.lineTo(0,-29);c.moveTo(0,-25);c.quadraticCurveTo(2,-21,4,-24);c.stroke();
+    c.fillStyle='#faedc3';c.beginPath();c.moveTo(-15,-18);c.lineTo(-15,-11);c.quadraticCurveTo(-18,-8,-19,-12);c.lineTo(-19,-18);c.fill();c.stroke();
+    if(o.punch&&!o.staff){c.beginPath();c.moveTo(17,-17);c.lineTo(33,-23);c.quadraticCurveTo(39,-23,37,-17);c.lineTo(18,-12);c.fill();c.stroke()}
+    else{c.beginPath();c.moveTo(19,-19);c.lineTo(19,-12);c.quadraticCurveTo(16,-9,15,-13);c.lineTo(15,-16);c.fill();c.stroke()}
+    if(o.staff)heldStaff(c,18,-14,o);c.restore();
+  }
+  function fries(c,x,y,angle=0,scale=1){
+    c.save();c.translate(Math.round(x),Math.round(y));c.rotate(angle);c.scale(scale,scale);
+    // Red pixel carton and golden fries, based on the second reference.
+    poly(c,[[-10,-6],[-8,-11],[8,-11],[11,-6],[9,12],[-8,12]],'#302527');
+    poly(c,[[-8,-5],[-6,-9],[7,-9],[9,-5],[7,10],[-6,10]],'#d82830');
+    rect(c,-8,-4,3,11,'#b7212a');rect(c,6,-4,3,11,'#9d1c25');
+    for(let i=0;i<6;i++){const x=-8+i*3,h=[16,20,15,18,14,16][i];rect(c,x,-h,4,h-5,'#5b4127');rect(c,x+1,-h+1,2,h-7,i%2?'#ffcd35':'#ffe76a')}
+    rect(c,-7,-6,15,3,'#eb3536');rect(c,-3,0,7,6,'#fff0c1');rect(c,-4,2,9,2,'#fff0c1');rect(c,-2,1,5,4,'#ffd43d');c.restore();
+  }
+
+  return{C,rect,poly,usagi,fries,momonga,cuteMomonga,enemy,goods,star,staff,fireCloud,world,ready};
 })();
 
 </script>
@@ -495,12 +545,12 @@ window.GameAudio=(()=>{
   const H=270,G=H-32,END=4440,MAX_HP=6;
   let W=480,state='title',stage=0,cam=0,time=0,last=0,elapsed=0,coins=0,kills=0;
   let enemies=[],particles=[],floaters=[],conquered=[],shake=0,toastTime=0,hudTime=0,combo=0,comboTime=0;
-  let player,checkpoint,locked=false,sound=true,activeSkin='normal',runPurchase=false,summons=[];
+  let player,checkpoint,locked=false,sound=true,activeSkin='normal',runPurchase=false,summons=[],friesProjectiles=[],runNumber=1,hardMode=false;
   const SAVE_KEY='usagi-openrun-collection-v4';
   let profile={items:[],clears:0,skin:'normal'},storageAvailable=true;
-  try{const data=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(data&&typeof data==='object'){profile.items=[...new Set((Array.isArray(data.items)?data.items:[]).filter(id=>['popcorn','figure','keyring'].includes(id)))];profile.clears=Number.isSafeInteger(data.clears)&&data.clears>=0?data.clears:0;profile.skin=data.skin==='mcd'&&profile.items.length===3?'mcd':'normal'}}catch{}
+  try{const data=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(data&&typeof data==='object'){profile.items=[...new Set((Array.isArray(data.items)?data.items:[]).filter(id=>['popcorn','figure','keyring'].includes(id)))];profile.clears=Number.isSafeInteger(data.clears)&&data.clears>=0?data.clears:0;profile.skin=profile.items.length===3&&(data.skin==='mcd'||(data.skin==='lop'&&profile.clears>=3))?data.skin:'normal'}}catch{}
   function saveProfile(){profile.items=[...bought];try{localStorage.setItem(SAVE_KEY,JSON.stringify(profile));storageAvailable=true}catch{storageAvailable=false;toast('저장을 사용할 수 없어요. 이 탭을 닫으면 수집 기록이 사라질 수 있어요.',4)}}
-  function chooseSkin(skin){if(skin==='mcd'&&bought.size<3)return;profile.skin=skin;saveProfile();title()}
+  function chooseSkin(skin){if(!['normal','mcd','lop'].includes(skin)||(skin!=='normal'&&bought.size<3)||(skin==='lop'&&profile.clears<3))return;profile.skin=skin;saveProfile();title()}
   const fanNotice='본 게임은 비공식 팬게임이며, 원작자(Nagano) 및 치이카와 공식 제작사와 관련이 없습니다';
   let staffUnlocked=false,fireCooldown=0,fireClouds=[],bossIntroduced=false,bossIntro=0;
   const FIRE_DAMAGE=3,FIRE_COOLDOWN=2.2,BOSS_TRIGGER=3970,BOSS_STAFF_X=4050;
@@ -513,10 +563,21 @@ window.GameAudio=(()=>{
   const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
   let best=0;try{const v=Number(localStorage.getItem('usagi-openrun-best-v4'));if(Number.isFinite(v)&&v>0)best=v}catch{}
   if(best)$('best').textContent='BEST '+fmt(best);
+  const power=()=>runNumber>=4&&activeSkin!=='normal'?3:1;
+  const skinName=skin=>({normal:'기본 우사기',mcd:'맥도날드 우사기',lop:'롭이어 우사기'}[skin]||'기본 우사기');
+  const bestKey=()=>hardMode?'usagi-openrun-best-hard-v5':'usagi-openrun-best-v4';
+  function loadBest(){best=0;try{const n=Number(localStorage.getItem(bestKey()));if(Number.isFinite(n)&&n>0)best=n}catch{}$('best').textContent=(hardMode?'HARD BEST ':'BEST ')+(best?fmt(best):'—')}
+  function requestReset(){if(state==='playing')togglePause();clearInput();$('resetDialog').showModal();$('cancelReset').focus()}
+  function confirmReset(){
+    if(!$('resetDialog').open)return;
+    try{for(const key of [SAVE_KEY,'usagi-openrun-best-v3','usagi-openrun-best-v4','usagi-openrun-best-hard-v5'])localStorage.removeItem(key)}catch{toast('저장 공간에 접근할 수 없어 초기화하지 못했어요.',4);$('resetDialog').close();return}
+    profile={items:[],clears:0,skin:'normal'};bought.clear();best=0;
+    reset();title();$('resetDialog').close();$('startGame').focus();toast('기록 초기화 완료! 1회차부터 시작합니다.',3);
+  }
   function resize(){W=window.innerWidth<=700?360:480;canvas.width=W;canvas.height=H;ctx.imageSmoothingEnabled=false;cam=Math.max(0,Math.min(END-W+190,(player?.x||0)-W*.33))}
-  function newPlayer(x=80){return{x,y:G,vy:0,hp:MAX_HP,face:1,walk:0,attack:0,cast:0,cooldown:0,invul:0,dash:0,dashCD:0,knock:0,ground:true}}
-  function seedEnemies(){enemies=spawns.flatMap((xs,z)=>xs.map((x,i)=>({x,y:G,hp:z===2&&i===14?28:2+z,maxHp:z===2&&i===14?28:2+z,stage:z,boss:z===2&&i===14,kind:i%3,face:-1,walk:0,attack:0,cooldown:.3+i*.11,hit:0,reveal:0,knock:0,active:false,dead:false,death:0,summonCD:2.4,summoning:0}))) }
-  function reset(){stage=0;elapsed=0;coins=0;kills=0;combo=0;comboTime=0;cam=0;particles=[];floaters=[];fireClouds=[];staffUnlocked=false;fireCooldown=0;bossIntroduced=false;bossIntro=0;GameAudio.reset();runPurchase=false;summons=[];activeSkin=profile.skin;player=newPlayer();seedEnemies();conquered=[];checkpoint={coins:0,kills:0,staff:false};locked=false;updateCollection();renderHUD();}
+  function newPlayer(x=80){return{x,y:G,vy:0,hp:MAX_HP,face:1,walk:0,attack:0,cast:0,cooldown:0,invul:0,dash:0,dashCD:0,knock:0,ground:true,costumeCD:0,spin:0,spinAge:0,spinFace:1,spinHits:new Set()}}
+  function seedEnemies(){enemies=spawns.flatMap((xs,z)=>xs.map((x,i)=>({x,y:G,hp:(z===2&&i===14?28:2+z)*(hardMode?3:1),maxHp:(z===2&&i===14?28:2+z)*(hardMode?3:1),stage:z,boss:z===2&&i===14,kind:i%3,face:-1,walk:0,attack:0,cooldown:.3+i*.11,hit:0,reveal:0,knock:0,active:false,dead:false,death:0,summonCD:2.4,summoning:0}))) }
+  function reset(){runNumber=profile.clears+1;hardMode=runNumber>=4;loadBest();stage=0;elapsed=0;coins=0;kills=0;combo=0;comboTime=0;cam=0;particles=[];floaters=[];fireClouds=[];staffUnlocked=false;fireCooldown=0;bossIntroduced=false;bossIntro=0;GameAudio.reset();runPurchase=false;summons=[];friesProjectiles=[];activeSkin=profile.skin;player=newPlayer();seedEnemies();conquered=[];checkpoint={coins:0,kills:0,staff:false};locked=false;updateCollection();renderHUD();}
   function clearInput(){inputs.clear();keyInputs.clear();pointerInputs.clear();jumpQueued=false;dashQueued=false;document.querySelectorAll('[data-input]').forEach(b=>b.classList.remove('pressed'))}
   function syncInput(){inputs.clear();keyInputs.forEach(x=>inputs.add(x));pointerInputs.forEach(x=>inputs.add(x))}
   function soundInit(){if(sound)sound=GameAudio.setEnabled(true)}
@@ -532,26 +593,31 @@ window.GameAudio=(()=>{
     $('skillButton').disabled=!staffUnlocked||state!=='playing';$('skillButton').classList.toggle('charging',fireCooldown>0);
     $('skillButton').setAttribute('aria-label',!staffUnlocked?'토벌봉을 먼저 획득하세요':fireCooldown>0?'불구름 충전 중':'불구름 공격, 주먹의 3배 피해');
     $('skillButtonText').textContent=!staffUnlocked?(bossIntroduced?'반짝이는 토벌봉을 주워 주세요':'토벌봉은 모몽가 보스전에서 등장'):fireCooldown>0?`불구름 충전 중 · ${fireCooldown.toFixed(1)}초`:'불구름 발사 · 피해 3배';
+    const costumeLabel=activeSkin==='lop'?'회전 몸통박치기':activeSkin==='mcd'?'감자튀김 던지기':'코스튬 전용 기술';
+    $('costumeButton').disabled=activeSkin==='normal'||state!=='playing';
+    $('costumeButton').classList.toggle('charging',player.costumeCD>0);
+    $('costumeButtonText').textContent=activeSkin==='normal'?'굿즈 3종을 모으면 코스튬 기술 해금':player.costumeCD>0?`${costumeLabel} · ${player.costumeCD.toFixed(1)}초`:`${costumeLabel} · 준비 완료`;
+    $('costumeStatus').textContent=`${runNumber}회차 · ${hardMode?'HARD':'MEDIUM+'} · 공격 ×${power()}${activeSkin!=='normal'?' · E '+costumeLabel:''}`;
     if(state==='playing'){$('goal').textContent=bossIntroduced&&enemies.some(e=>e.boss&&!e.dead)?'최종 흑막 · 모몽가':player.x>zones[stage].end-200?`남은 적 ${enemies.filter(e=>e.stage===stage&&!e.dead).length}명`:'목표: 치이카와 샵 첫 입장';$('gameStatus').textContent=`STAGE 0${stage+1} / ${fmt(elapsed)}`}
   }
   function miniArt(){document.querySelectorAll('canvas[data-art]').forEach(c=>{let v=c.getContext('2d');v.clearRect(0,0,c.width,c.height);v.imageSmoothingEnabled=false;Art.goods(v,c.dataset.art,0,0,c.width)})}
   function heroArt(){let c=$('heroUsagi');if(c){const a=c.getContext('2d');a.clearRect(0,0,c.width,c.height);a.imageSmoothingEnabled=false;Art.usagi(a,40,76,1.02,{shadow:false,hop:1,skin:state==='title'?profile.skin:activeSkin})}}
   function title(){
     state='title';GameAudio.pause();clearInput();$('pause').disabled=true;
-    $('overlay').innerHTML=`<div class="start-card title-card"><span class="small-label">RUN ${profile.clears+1} · MEDIUM+ · COLLECTION ${bought.size}/3</span><canvas class="hero-rabbit" id="heroUsagi" width="80" height="80" aria-label="선택한 우사기"></canvas><h2>굿즈좀 사자ㅡㅡ</h2><p>밤샘 대기 → 새벽 광장 → 치이카와 샵!<br>되팔렘과 모몽가를 물리치고 굿즈 하나씩 모아요.</p>${bought.size===3?`<div class="skin-picker" aria-label="플레이 캐릭터"><button id="normalSkin" aria-pressed="${profile.skin==='normal'}">기본 우사기</button><button id="mcdSkin" aria-pressed="${profile.skin==='mcd'}">맥도날드 우사기</button></div>`:`<div class="unlock-hint">굿즈 3종 수집 → 맥도날드 우사기 해금</div>`}<button id="startGame" class="primary">${profile.clears+1}회차 오픈런 시작 →</button><p class="fan-notice">${fanNotice}</p></div>`;
+    $('overlay').innerHTML=`<div class="start-card title-card"><span class="small-label">RUN ${profile.clears+1} · ${profile.clears>=3?'HARD':'MEDIUM+'} · COLLECTION ${bought.size}/3</span><canvas class="hero-rabbit" id="heroUsagi" width="80" height="80" aria-label="선택한 우사기"></canvas><h2>굿즈좀 사자ㅡㅡ</h2><p>밤샘 대기 → 새벽 광장 → 치이카와 샵!<br>되팔렘과 모몽가를 물리치고 굿즈 하나씩 모아요.</p>${bought.size===3?`<div class="skin-picker" aria-label="플레이 캐릭터"><button id="normalSkin" aria-pressed="${profile.skin==='normal'}">기본 우사기</button><button id="mcdSkin" aria-pressed="${profile.skin==='mcd'}">맥도날드 우사기</button>${profile.clears>=3?`<button id="lopSkin" aria-pressed="${profile.skin==='lop'}">롭이어 우사기</button>`:''}</div><div class="costume-description">${profile.skin==='lop'?'공격력 ×3 · E 회전 몸통박치기':profile.skin==='mcd'?'공격력 ×3 · E 감자튀김 던지기':'기본 공격력 ×1 · 오리지널 플레이'}</div>`:`<div class="unlock-hint">굿즈 3종 수집 → 4회차 맥도날드·롭이어 해금</div>`}<button id="startGame" class="primary">${profile.clears+1}회차 오픈런 시작 →</button><p class="fan-notice">${fanNotice}</p></div>`;
     $('startGame').addEventListener('click',start);
-    if(bought.size===3){$('normalSkin').addEventListener('click',()=>chooseSkin('normal'));$('mcdSkin').addEventListener('click',()=>chooseSkin('mcd'))}heroArt();
+    if(bought.size===3){$('normalSkin').addEventListener('click',()=>chooseSkin('normal'));$('mcdSkin').addEventListener('click',()=>chooseSkin('mcd'));if(profile.clears>=3)$('lopSkin').addEventListener('click',()=>chooseSkin('lop'))}heroArt();
   }
-  function start(){reset();state='playing';$('overlay').innerHTML='';$('pause').disabled=false;$('pause').textContent='Ⅱ';clearInput();soundInit();GameAudio.tick();tone(523,.09);setTimeout(()=>tone(784,.15),100);toast('용산에 도착! → 이동 · J 주먹 · Space 점프',3);canvas.focus({preventScroll:true});renderHUD()}
+  function start(){reset();state='playing';$('overlay').innerHTML='';$('pause').disabled=false;$('pause').textContent='Ⅱ';clearInput();soundInit();GameAudio.tick();tone(523,.09);setTimeout(()=>tone(784,.15),100);toast('A/D 이동 · W 점프 · S 대시 · J 주먹 · E 코스튬 기술',3);canvas.focus({preventScroll:true});renderHUD()}
   function togglePause(){
     if(state==='playing'){state='paused';GameAudio.pause();clearInput();$('pause').textContent='▶';$('pause').setAttribute('aria-label','게임 계속하기');$('overlay').innerHTML='<div class="start-card"><span class="small-label">TAKE A LITTLE BREAK</span><h2>잠깐, 숨 고르기</h2><p>우사기도 밤샘엔 휴식이 필요해요.<br>오픈런은 여기서 기다리고 있을게요.</p><button id="resumeGame" class="primary">이어서 달리기 →</button></div>';$('resumeGame').addEventListener('click',togglePause);$('gameStatus').textContent='PAUSED'}
     else if(state==='paused'){state='playing';$('overlay').innerHTML='';$('pause').textContent='Ⅱ';$('pause').setAttribute('aria-label','일시정지');soundInit();GameAudio.tick();canvas.focus({preventScroll:true})}
   }
   function hitParticles(x,y,color,count=10){for(let i=0;i<count;i++)particles.push({x,y,vx:(Math.random()-.5)*160,vy:-40-Math.random()*110,life:.25+Math.random()*.35,color,size:i%3===0?3:2})}
   function floating(text,x,y,color='#ffdf94'){floaters.push({text,x,y,life:1,color})}
-  function damagePlayer(dir){if(player.invul>0||player.dash>0||state!=='playing')return;player.hp=Math.max(0,player.hp-1);player.invul=.88;player.knock=dir*145;player.vy=-80;player.ground=false;shake=5;combo=0;tone(145,.17,'sawtooth',.035,55);hitParticles(player.x,player.y-25,'#f2abc8',8);renderHUD();if(player.hp<=0)gameover()}
+  function damagePlayer(dir){if(player.invul>0||player.dash>0||player.spin>0||state!=='playing')return;player.hp=Math.max(0,player.hp-1);player.invul=.88;player.knock=dir*145;player.vy=-80;player.ground=false;shake=5;combo=0;tone(145,.17,'sawtooth',.035,55);hitParticles(player.x,player.y-25,'#f2abc8',8);renderHUD();if(player.hp<=0)gameover()}
   function gameover(){state='gameover';GameAudio.pause();clearInput();$('pause').disabled=true;$('gameStatus').textContent='TRY AGAIN';$('overlay').innerHTML=`<div class="start-card"><span class="small-label">THE NIGHT IS STILL YOUNG</span><h2>잠깐 졸았을 뿐이야…</h2><p>괜찮아! ${stage+1}구역 시작부터 다시 도전해요.<br>이전 구역에서 모은 코인은 그대로예요.</p><button id="retryGame" class="primary">체력 채우고 재도전 →</button><p class="hint">붉은 느낌표가 뜨면 점프나 대시로 피해 보세요.</p></div>`;$('retryGame').addEventListener('click',retry)}
-  function retry(){const keep=enemies.filter(e=>e.stage<stage);seedEnemies();enemies=enemies.filter(e=>e.stage>=stage).concat(keep);coins=checkpoint.coins;kills=checkpoint.kills;staffUnlocked=false;bossIntroduced=false;bossIntro=0;fireCooldown=0;fireClouds=[];summons=[];GameAudio.reset();player=newPlayer(zones[stage].start);cam=Math.max(0,player.x-W*.33);particles=[];floaters=[];state='playing';locked=false;clearInput();soundInit();GameAudio.tick();$('pause').disabled=false;$('overlay').innerHTML='';canvas.focus({preventScroll:true});toast('다시 출발! 토벌봉은 모몽가가 등장할 때 나타나요.');renderHUD()}
+  function retry(){const keep=enemies.filter(e=>e.stage<stage);seedEnemies();enemies=enemies.filter(e=>e.stage>=stage).concat(keep);coins=checkpoint.coins;kills=checkpoint.kills;staffUnlocked=false;bossIntroduced=false;bossIntro=0;fireCooldown=0;fireClouds=[];summons=[];friesProjectiles=[];GameAudio.reset();player=newPlayer(zones[stage].start);cam=Math.max(0,player.x-W*.33);particles=[];floaters=[];state='playing';locked=false;clearInput();soundInit();GameAudio.tick();$('pause').disabled=false;$('overlay').innerHTML='';canvas.focus({preventScroll:true});toast('다시 출발! 토벌봉은 모몽가가 등장할 때 나타나요.');renderHUD()}
   function damageEnemy(e,amount,direction){
     if(e.dead||e.stage!==stage||(e.boss&&!bossIntroduced))return;
     e.hp=Math.max(0,e.hp-amount);e.hit=.17;e.knock=direction*(e.boss?25:95);if(!e.boss)e.attack=0;e.cooldown=Math.max(e.cooldown,.18);e.active=true;
@@ -562,31 +628,31 @@ window.GameAudio=(()=>{
     if(e.hp<=0){e.dead=true;e.death=.5;kills++;const reward=e.boss?10:1;coins+=reward;floating(`+${reward} C`,e.x,e.y-50);if(e.boss){summons=[];toast('모몽가의 정체를 밝혀냈다! 이제 굿즈 사러 가자!');tone(1047,.18,'triangle',.05)}}
   }
   function castFire(){
-    if(state!=='playing'||!staffUnlocked||fireCooldown>0||player.dash>0)return false;
+    if(state!=='playing'||!staffUnlocked||fireCooldown>0||player.dash>0||player.spin>0)return false;
     fireCooldown=FIRE_COOLDOWN;player.cast=.32;player.attack=0;player.cooldown=Math.max(player.cooldown,.22);
     fireClouds.push({x:player.x+player.face*49,y:player.y-27,face:player.face,age:0,life:1.05,hit:new Set()});
     hitParticles(player.x+player.face*45,player.y-27,'#ffd776',7);tone(160,.24,'sawtooth',.035,55);tone(420,.18,'triangle',.04,90);renderHUD();return true;
   }
   function attack(){
-    if(player.cooldown>0||player.dash>0||player.cast>0)return;
+    if(player.cooldown>0||player.dash>0||player.cast>0||player.spin>0)return;
     player.attack=.17;player.cooldown=.36;GameAudio.whoosh();
     let hit=false,hitCount=0;
     for(const e of enemies){if(e.dead||e.stage!==stage||(e.boss&&!bossIntroduced)||hitCount>=2)continue;let dx=e.x-player.x;
       if(Math.abs(dx)<(e.boss?60:49)&&dx*player.face>-10&&Math.abs(player.y-e.y)<55){
-        damageEnemy(e,1,player.face);hit=true;hitCount++;
+        damageEnemy(e,power(),player.face);hit=true;hitCount++;
       }
     }
     for(const m of summons){if(m.hp>0&&Math.abs(m.x-player.x)<56&&(m.x-player.x)*player.face>-12&&Math.abs(m.y-(player.y-22))<32){m.hp=0;hitParticles(m.x,m.y,'#b9e5f0',7);GameAudio.impact()}}
     if(hit)renderHUD();
   }
   function advance(){
-    stage++;checkpoint={coins,kills,staff:staffUnlocked};fireClouds=[];fireCooldown=0;player.hp=Math.min(MAX_HP,player.hp+2);player.invul=1.5;locked=false;conquered.push(stage);
-    toast(stage===1?'STAGE 02 · 새벽이 밝았어요! 체력 2칸 회복 ♥':'STAGE 03 · 샵 앞에 누군가 기다리고 있다…',3);
+    stage++;friesProjectiles=[];player.spin=0;checkpoint={coins,kills,staff:staffUnlocked};fireClouds=[];fireCooldown=0;player.hp=Math.min(MAX_HP,player.hp+(hardMode?1:2));player.invul=1.5;locked=false;conquered.push(stage);
+    toast(`STAGE 0${stage+1} · ${hardMode?'HARD · 체력 1칸 회복 ♥':'체력 2칸 회복 ♥'}`,3);
     tone(523,.1);setTimeout(()=>tone(659,.1),100);setTimeout(()=>tone(784,.2),200);renderHUD();
   }
   function openShop(){
     if(state!=='playing')return;
-    state='shop';profile.clears++;saveProfile();GameAudio.pause();summons=[];fireClouds=[];fireCooldown=0;player.cast=0;clearInput();$('pause').disabled=true;$('skillButton').disabled=true;$('progress').style.width='100%';$('goal').textContent='첫 번째 입장 성공!';$('location').textContent='치이카와 샵 · 10:00 OPEN';$('gameStatus').textContent='FIRST IN LINE!';$('toast').classList.remove('visible');
+    state='shop';friesProjectiles=[];player.spin=0;profile.clears++;saveProfile();GameAudio.pause();summons=[];fireClouds=[];fireCooldown=0;player.cast=0;clearInput();$('pause').disabled=true;$('skillButton').disabled=true;$('costumeButton').disabled=true;$('progress').style.width='100%';$('goal').textContent='첫 번째 입장 성공!';$('location').textContent='치이카와 샵 · 10:00 OPEN';$('gameStatus').textContent='FIRST IN LINE!';$('toast').classList.remove('visible');
     $('overlay').innerHTML=`<div class="shop-card"><span class="small-label">RUN ${profile.clears} CLEARED · ONE SPECIAL PICK</span><h2>오늘은 어떤 굿즈를 살까?</h2><p>모은 코인 <strong id="shopCoins">${coins}</strong> C · 한 회차에 굿즈 1개!<br>모든 굿즈 40 C · 수집 기록은 다음 회차에도 유지돼요.</p><div class="shop-grid">${merchandise.map(m=>`<div class="shop-item"><canvas width="64" height="64" data-art="${m.id}" aria-label="${m.name}"></canvas><h3>${m.name}</h3><button data-buy="${m.id}" ${bought.has(m.id)?'disabled':''}>${bought.has(m.id)?'✓ 수집 완료':m.price+' C · 구매'}</button></div>`).join('')}</div><button id="finishShopping" class="primary" style="margin-top:12px" ${bought.size===3?'':'disabled'}>${bought.size===3?'결과 보기 →':'굿즈 하나를 골라 주세요'}</button></div>`;
     document.querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',()=>purchase(b.dataset.buy)));$('finishShopping').addEventListener('click',win);miniArt();tone(1047,.16,'triangle',.05);
   }
@@ -601,21 +667,50 @@ window.GameAudio=(()=>{
   }
   function updateCollection(){
     document.querySelectorAll('[data-item]').forEach(el=>el.classList.toggle('collected',bought.has(el.dataset.item)));$('collectionCount').textContent=`${bought.size} / 3`;
-    $('unlockStatus').textContent=bought.size===3?'해금 완료! 다음 게임부터 맥도날드 우사기를 선택할 수 있어요.':`맥도날드 우사기까지 ${3-bought.size}개! 한 회차에 하나씩 모아 보세요.`;
+    $('unlockStatus').textContent=bought.size===3?'해금 완료! 4회차부터 맥도날드·롭이어 우사기, 공격력 3배 + E 전용 기술.':`코스튬 해금까지 ${3-bought.size}개! 4회차부터 맥도날드·롭이어를 선택해 보세요.`;
   }
   function win(){
     if(state!=='shop'||(!runPurchase&&bought.size<3))return;state='win';
-    let record=!best||elapsed<best;if(record){best=elapsed;try{localStorage.setItem('usagi-openrun-best-v4',String(best))}catch{}$('best').textContent='BEST '+fmt(best)}
+    let record=!best||elapsed<best;if(record){best=elapsed;try{localStorage.setItem(bestKey(),String(best))}catch{}$('best').textContent=(hardMode?'HARD BEST ':'BEST ')+fmt(best)}
     const complete=bought.size===3;
-    $('overlay').innerHTML=`<div class="start-card"><span class="small-label">${complete?'ALL GOODS COLLECTED':'ONE MORE FOR THE COLLECTION'}</span><canvas class="hero-rabbit" id="heroUsagi" width="80" height="80" aria-label="우사기"></canvas><h2>${complete?'맥도날드 우사기 해금!':'오늘의 굿즈, 득템!'}</h2><p>${complete?'다음 게임부터 새 유니폼으로 달려요!<br>캐릭터 선택에서 기본 우사기로도 바꿀 수 있어요.':`굿즈 ${bought.size}/3종 수집. 다음 오픈런에서 또 만나요!<br>수집한 굿즈는 같은 브라우저에 자동 저장돼요.`}</p><div class="result-stats"><div>클리어 시간<strong>${fmt(elapsed)}</strong></div><div>누적 클리어<strong>${profile.clears}회</strong></div><div>굿즈 수집<strong>${bought.size} / 3</strong></div></div><button id="playAgain" class="primary">${complete&&profile.skin==='mcd'?'맥도날드 우사기로 출발 →':'다음 회차 오픈런 →'}</button><button id="returnTitle" class="text-button">시작 화면 · 캐릭터 선택</button></div>`;
+    $('overlay').innerHTML=`<div class="start-card"><span class="small-label">${complete?'ALL GOODS COLLECTED':'ONE MORE FOR THE COLLECTION'}</span><canvas class="hero-rabbit" id="heroUsagi" width="80" height="80" aria-label="우사기"></canvas><h2>${complete?'HARD 오픈런, 준비 완료!':'오늘의 굿즈, 득템!'}</h2><p>${complete?'4회차부터 HARD! 맥도날드·롭이어 공격력 3배.<br>캐릭터 선택에서 E 전용 기술을 확인하세요.':`굿즈 ${bought.size}/3종 수집. 다음 오픈런에서 또 만나요!<br>수집한 굿즈는 같은 브라우저에 자동 저장돼요.`}</p><div class="result-stats"><div>클리어 시간<strong>${fmt(elapsed)}</strong></div><div>누적 클리어<strong>${profile.clears}회</strong></div><div>굿즈 수집<strong>${bought.size} / 3</strong></div></div><button id="playAgain" class="primary">${complete?skinName(profile.skin)+'로 출발 →':'다음 회차 오픈런 →'}</button><button id="returnTitle" class="text-button">시작 화면 · 캐릭터 선택</button></div>`;
     heroArt();$('playAgain').addEventListener('click',start);$('returnTitle').addEventListener('click',title);$('gameStatus').textContent=complete?'MCD USAGI UNLOCKED':'COLLECTION SAVED';
     for(let i=0;i<40;i++)particles.push({x:cam+Math.random()*W,y:Math.random()*70,vx:(Math.random()-.5)*70,vy:-40-Math.random()*80,life:2+Math.random()*2,color:['#ffdf93','#efaec9','#b3e4d3'][i%3],size:3});
   }
   function summonWave(boss){
-    const count=boss.hp<=14?3:2,face=player.x<boss.x?-1:1;
-    for(let i=0;i<count;i++)summons.push({x:boss.x+face*(35+i*31),y:G-20-(i%2)*37,baseY:G-20-(i%2)*37,face,age:0,life:6,hp:1,speed:110+i*12});
+    const count=(boss.hp<=boss.maxHp/2?3:2)+(hardMode?1:0),face=player.x<boss.x?-1:1;
+    for(let i=0;i<count;i++)summons.push({x:boss.x+face*(35+i*31),y:G-20-(i%2)*37,baseY:G-20-(i%2)*37,face,age:0,life:6,hp:1,speed:(110+i*12)*(hardMode?1.25:1)});
     floating('귀여운 모몽가 소환!',boss.x,boss.y-114,'#b4ecf5');tone(650,.2,'triangle',.04,300);
   }
+
+  function costumeSkill(){
+    if(state!=='playing'||activeSkin==='normal'||player.costumeCD>0||player.dash>0||player.spin>0||player.cast>0)return false;
+    player.attack=0;player.cooldown=.25;
+    if(activeSkin==='lop'){
+      player.costumeCD=3.5;player.spin=.65;player.spinAge=0;player.spinFace=player.face;player.spinHits=new Set();
+      hitParticles(player.x,player.y-25,'#ffe3a2',14);GameAudio.whoosh();tone(390,.18,'triangle',.035,720);
+    }else{
+      player.costumeCD=3;player.cast=.25;
+      for(let i=0;i<3;i++)friesProjectiles.push({x:player.x+player.face*26,y:player.y-28,vy:(i-1)*32,face:player.face,life:1.15,age:0,damage:2*power(),hit:new Set()});
+      tone(520,.12,'square',.025,290);
+    }
+    renderHUD();return true;
+  }
+  function updateCostumeAttacks(dt){
+    if(player.spin>0){
+      for(const e of enemies){if(e.dead||e.stage!==stage||(e.boss&&!bossIntroduced)||player.spinHits.has(e))continue;
+        if(Math.abs(e.x-player.x)<(e.boss?55:43)&&Math.abs(e.y-player.y)<58){player.spinHits.add(e);damageEnemy(e,2*power(),player.spinFace)}}
+      for(const m of summons)if(Math.abs(m.x-player.x)<43&&Math.abs(m.y-(player.y-25))<43){m.hp=0;hitParticles(m.x,m.y,'#bfe7ec',6)}
+    }
+    for(const f of friesProjectiles){
+      f.age+=dt;f.life-=dt;f.x+=f.face*310*dt;f.y+=f.vy*dt;
+      for(const e of enemies){if(e.dead||e.stage!==stage||(e.boss&&!bossIntroduced)||f.hit.has(e))continue;
+        if(Math.abs(f.x-e.x)<(e.boss?37:25)&&Math.abs(f.y-(e.y-30))<32){f.hit.add(e);damageEnemy(e,f.damage,f.face);f.life=0;hitParticles(f.x,f.y,'#ffd545',6);break}}
+      if(f.life>0)for(const m of summons){if(m.hp>0&&Math.abs(m.x-f.x)<24&&Math.abs(m.y-f.y)<27){m.hp=0;f.life=0;hitParticles(m.x,m.y,'#ffdc57',6);break}}
+    }
+    friesProjectiles=friesProjectiles.filter(f=>f.life>0);
+  }
+
   function update(dt){
     if(state==='paused'||state==='gameover'||document.hidden)return;
     time+=dt;if(toastTime>0){toastTime-=dt;if(toastTime<=0)$('toast').classList.remove('visible')}
@@ -624,30 +719,33 @@ window.GameAudio=(()=>{
     shake=Math.max(0,shake-25*dt);
     if(state!=='playing')return;
     elapsed+=dt;playMusic(dt);player.attack=Math.max(0,player.attack-dt);player.cooldown=Math.max(0,player.cooldown-dt);player.invul=Math.max(0,player.invul-dt);player.dashCD=Math.max(0,player.dashCD-dt);player.dash=Math.max(0,player.dash-dt);comboTime-=dt;if(comboTime<=0)combo=0;
+    player.costumeCD=Math.max(0,player.costumeCD-dt);player.spin=Math.max(0,player.spin-dt);if(player.spin>0)player.spinAge+=dt;
     fireCooldown=Math.max(0,fireCooldown-dt);player.cast=Math.max(0,player.cast-dt);bossIntro=Math.max(0,bossIntro-dt);
-    let dir=(inputs.has('right')?1:0)-(inputs.has('left')?1:0);if(dir&&player.dash<=0)player.face=dir;
-    if(jumpQueued){if(player.ground){player.vy=-295;player.ground=false;tone(320,.12,'square',.025,660)}jumpQueued=false}
-    if(dashQueued){if(player.dashCD<=0){player.dash=.2;player.dashCD=1.3;tone(490,.1,'triangle',.025,120);hitParticles(player.x-player.face*12,player.y-10,'#ddd1e7',5)}dashQueued=false}
+    let dir=(inputs.has('right')?1:0)-(inputs.has('left')?1:0);if(dir&&player.dash<=0&&player.spin<=0)player.face=dir;
+    if(jumpQueued){if(player.ground&&player.spin<=0){player.vy=-295;player.ground=false;tone(320,.12,'square',.025,660)}jumpQueued=false}
+    if(dashQueued){if(player.dashCD<=0&&player.spin<=0){player.dash=.2;player.dashCD=1.3;tone(490,.1,'triangle',.025,120);hitParticles(player.x-player.face*12,player.y-10,'#ddd1e7',5)}dashQueued=false}
+    if(inputs.has('costume'))costumeSkill();
     if(inputs.has('skill'))castFire();
     if(inputs.has('punch'))attack();
-    const speed=player.dash>0?360:128;player.x+=(player.dash>0?player.face*speed:dir*speed)*dt+player.knock*dt;player.knock*=Math.exp(-10*dt);
+    const speed=player.dash>0?360:128;player.x+=(player.spin>0?player.spinFace*340:player.dash>0?player.face*speed:dir*speed)*dt+player.knock*dt;player.knock*=Math.exp(-10*dt);
     if(dir||player.dash>0)player.walk+=dt*15;else player.walk=0;
     player.vy+=760*dt;player.y+=player.vy*dt;if(player.y>=G){player.y=G;player.vy=0;player.ground=true}
     player.x=Math.max(zones[stage].start-25,Math.min(zones[stage].end,player.x));
     if(stage===2&&!bossIntroduced&&player.x>=BOSS_TRIGGER){bossIntroduced=true;bossIntro=1.4;const boss=enemies.find(e=>e.boss);boss.active=true;boss.cooldown=1.4;toast('최종 흑막 모몽가 등장! 앞에 토벌봉이 나타났다!',3.3);floating('BOSS · MOMONGA',boss.x,boss.y-90,'#f4bdd3');tone(110,.4,'triangle',.06,55);renderHUD()}
     if(bossIntroduced&&!staffUnlocked&&Math.abs(player.x-BOSS_STAFF_X)<27&&player.y>G-70){staffUnlocked=true;floating('토벌봉 GET!',player.x,player.y-78,'#ffe299');toast('토벌봉 획득! L / 불구름으로 모몽가를 공격하세요!',3);castFire();renderHUD()}
-    for(const ox of obstacles){if(Math.abs(player.x-ox)<17&&player.y>G-14&&player.dash<=0){player.x=ox+(player.x<ox?-17:17);if(Math.abs(dir)>0&&toastTime<=0)toast('길 위의 콘은 점프로 넘어요! Space / 점프',1.8)}}
+    for(const ox of obstacles){if(Math.abs(player.x-ox)<17&&player.y>G-14&&player.dash<=0&&player.spin<=0){player.x=ox+(player.x<ox?-17:17);if(Math.abs(dir)>0&&toastTime<=0)toast('길 위의 콘은 점프로 넘어요! Space / 점프',1.8)}}
+    updateCostumeAttacks(dt);
     for(const cloud of fireClouds){
       cloud.x+=cloud.face*250*dt;cloud.age+=dt;cloud.life-=dt;
       for(const e of enemies){
         if(e.dead||e.stage!==stage||cloud.hit.has(e)||(e.boss&&!bossIntroduced))continue;
-        if(Math.abs(cloud.x-e.x)<(e.boss?46:35)&&Math.abs(cloud.y-(e.y-(e.boss?36:23)))<38){cloud.hit.add(e);damageEnemy(e,FIRE_DAMAGE,cloud.face)}
+        if(Math.abs(cloud.x-e.x)<(e.boss?46:35)&&Math.abs(cloud.y-(e.y-(e.boss?36:23)))<38){cloud.hit.add(e);damageEnemy(e,FIRE_DAMAGE*power(),cloud.face)}
       }
     }
     for(const cloud of fireClouds)for(const m of summons){if(m.hp>0&&Math.abs(m.x-cloud.x)<42&&Math.abs(m.y-cloud.y)<42){m.hp=0;hitParticles(m.x,m.y,'#b8e5ee',8)}}
     fireClouds=fireClouds.filter(c=>c.life>0);
     for(const m of summons){m.age+=dt;m.life-=dt;m.x+=m.face*m.speed*dt;m.y=m.baseY+Math.sin(m.age*5)*5;
-      if(m.hp>0&&Math.abs(m.x-player.x)<25&&Math.abs(m.y-(player.y-23))<24){if(player.dash<=0){damagePlayer(m.face);m.hp=0;hitParticles(m.x,m.y,'#b8e5ee',6)}}}
+      if(m.hp>0&&Math.abs(m.x-player.x)<25&&Math.abs(m.y-(player.y-23))<24){if(player.dash<=0&&player.spin<=0){damagePlayer(m.face);m.hp=0;hitParticles(m.x,m.y,'#b8e5ee',6)}}}
     summons=summons.filter(m=>m.hp>0&&m.life>0&&Math.abs(m.x-player.x)<W+150);
     for(const e of enemies){
       e.reveal=Math.max(0,e.reveal-dt);
@@ -659,11 +757,11 @@ window.GameAudio=(()=>{
       const dx=player.x-e.x;e.face=dx>=0?1:-1;
       if(e.boss){
         e.summonCD-=dt;
-        if(e.summoning>0){e.summoning-=dt;if(e.summoning<=0){summonWave(e);e.summonCD=e.hp<=14?4.5:5.4}continue}
-        if(e.summonCD<=0){e.summoning=.85;e.attack=0;toast('모몽가가 소환 준비! 주먹·불구름으로 막거나 대시로 피하세요.',1.6);continue}
+        if(e.summoning>0){e.summoning-=dt;if(e.summoning<=0){summonWave(e);e.summonCD=hardMode?(e.hp<=e.maxHp/2?3.3:4.1):(e.hp<=e.maxHp/2?4.5:5.4)}continue}
+        if(e.summonCD<=0){e.summoning=hardMode?.7:.85;e.attack=0;toast('모몽가가 소환 준비! 주먹·불구름으로 막거나 대시로 피하세요.',1.6);continue}
       }
-      if(e.attack>0){e.attack-=dt;if(e.attack<=0){if(Math.abs(player.x-e.x)<(e.boss?68:43)&&Math.abs(player.y-e.y)<(e.boss?42:32))damagePlayer(e.face);e.cooldown=e.boss?.68:.88-stage*.09}}
-      else if(e.hit<=0){if(Math.abs(dx)>(e.boss?50:31)){e.x+=Math.sign(dx)*(e.boss?74:56+stage*9+e.kind*5)*dt;e.walk+=dt*10}else if(e.cooldown<=0){e.attack=e.boss?.46:.56-stage*.065;tone(e.boss?180:220,.035,'triangle',.02)}}
+      if(e.attack>0){e.attack-=dt;if(e.attack<=0){if(Math.abs(player.x-e.x)<(e.boss?68:43)&&Math.abs(player.y-e.y)<(e.boss?42:32))damagePlayer(e.face);e.cooldown=(e.boss?.68:.88-stage*.09)*(hardMode?.76:1)}}
+      else if(e.hit<=0){if(Math.abs(dx)>(e.boss?50:31)){e.x+=Math.sign(dx)*(e.boss?74:56+stage*9+e.kind*5)*(hardMode?1.25:1)*dt;e.walk+=dt*10}else if(e.cooldown<=0){e.attack=(e.boss?.46:.56-stage*.065)*(hardMode?.8:1);tone(e.boss?180:220,.035,'triangle',.02)}}
       e.x+=e.knock*dt;e.knock*=Math.exp(-12*dt);e.x=Math.max(zones[stage].start-35,Math.min(zones[stage].end-25,e.x));
     }
     if(state!=='playing')return;
@@ -700,10 +798,15 @@ window.GameAudio=(()=>{
     if(state==='title'){Art.usagi(ctx,W*.76,G,1.1,{skin:profile.skin,walk:Math.sin(time*2),ear:Math.round(Math.sin(time*3))});Art.star(ctx,W*.76-35,G-54,'#ffdfa3',3);Art.star(ctx,W*.76+35,G-35,'#e6abc8',2)}
     else{
       if(player.dash>0){ctx.globalAlpha=.2;Art.usagi(ctx,player.x-cam-player.face*25,player.y,1,{skin:activeSkin,face:player.face,walk:player.walk,shadow:false});ctx.globalAlpha=.1;Art.usagi(ctx,player.x-cam-player.face*45,player.y,1,{skin:activeSkin,face:player.face,shadow:false});ctx.globalAlpha=1}
-      if(!(player.invul>0&&Math.floor(time*15)%2===0))Art.usagi(ctx,player.x-cam,player.y,1,{skin:activeSkin,face:player.face,walk:player.walk,punch:player.attack>0,staff:staffUnlocked,cast:player.cast>0,ear:player.ground?0:2,hurt:player.invul>1});
+      if(player.spin>0){
+        ctx.save();ctx.translate(player.x-cam,player.y-28);ctx.rotate(player.spinAge*25*player.spinFace);
+        Art.usagi(ctx,0,28,1,{skin:activeSkin,face:player.spinFace,staff:staffUnlocked,shadow:false});ctx.restore();
+        ctx.save();ctx.globalAlpha=.55;ctx.strokeStyle='#ffe1a0';ctx.lineWidth=2;ctx.beginPath();ctx.arc(player.x-cam,player.y-28,39,time*15,time*15+4);ctx.stroke();ctx.restore();
+      }else if(!(player.invul>0&&Math.floor(time*15)%2===0))Art.usagi(ctx,player.x-cam,player.y,1,{skin:activeSkin,face:player.face,walk:player.walk,punch:player.attack>0,staff:staffUnlocked,cast:player.cast>0,ear:player.ground?0:2,hurt:player.invul>1});
       if(player.attack>0){const ax=player.x-cam+player.face*52;ctx.globalAlpha=player.attack*5;Art.star(ctx,ax,player.y-24,'#fff0b6',7);ctx.globalAlpha=1}
       if(state==='playing'&&player.dashCD>0){Art.rect(ctx,player.x-cam-13,player.y+7,26,2,'#4c415c');Art.rect(ctx,player.x-cam-13,player.y+7,26*(1-player.dashCD/1.3),2,'#abdacb')}
     }
+    for(const f of friesProjectiles)Art.fries(ctx,f.x-cam,f.y,f.age*8*f.face,.75);
     for(const m of summons){Art.cuteMomonga(ctx,m.x-cam,m.y+17,{scale:.62});}
     for(const cloud of fireClouds){ctx.save();ctx.globalAlpha=Math.min(1,cloud.life*4);Art.fireCloud(ctx,cloud.x-cam,cloud.y,cloud.age,cloud.face);ctx.restore()}
     for(const p of particles){ctx.globalAlpha=Math.min(1,p.life*3);Art.rect(ctx,p.x-cam,p.y,p.size,p.size,p.color)}ctx.globalAlpha=1;
@@ -713,8 +816,9 @@ window.GameAudio=(()=>{
     ctx.restore();
   }
   function frame(now){const dt=Math.min((now-last)/1000||0,.033);last=now;update(dt);draw();requestAnimationFrame(frame)}
-  const keymap={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',ArrowUp:'jump',KeyW:'jump',Space:'jump',KeyJ:'punch',KeyZ:'punch',KeyK:'dash',KeyX:'dash',ShiftLeft:'dash',ShiftRight:'dash',KeyL:'skill',KeyC:'skill'};
+  const keymap={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',ArrowUp:'jump',KeyW:'jump',Space:'jump',KeyJ:'punch',KeyZ:'punch',KeyS:'dash',ArrowDown:'dash',KeyK:'dash',KeyX:'dash',ShiftLeft:'dash',ShiftRight:'dash',KeyL:'skill',KeyC:'skill',KeyE:'costume'};
   window.addEventListener('keydown',e=>{
+    if($('resetDialog').open)return;
     if((e.code==='KeyP'||e.code==='Escape')&&!e.repeat){if(state==='playing'||state==='paused'){e.preventDefault();togglePause()}return}
     if(state!=='playing')return;const action=keymap[e.code];if(!action)return;e.preventDefault();if(e.repeat)return;if(action==='jump')jumpQueued=true;if(action==='dash')dashQueued=true;keyInputs.add(action);syncInput();
   });
@@ -723,6 +827,9 @@ window.GameAudio=(()=>{
     b.addEventListener('pointerdown',e=>{e.preventDefault();if(state!=='playing')return;soundInit();b.setPointerCapture?.(e.pointerId);pointerInputs.set(e.pointerId,b.dataset.input);if(b.dataset.input==='jump')jumpQueued=true;if(b.dataset.input==='dash')dashQueued=true;syncInput();b.classList.add('pressed')});
     const release=e=>{pointerInputs.delete(e.pointerId);syncInput();b.classList.remove('pressed')};b.addEventListener('pointerup',release);b.addEventListener('pointercancel',release);b.addEventListener('lostpointercapture',release);b.addEventListener('contextmenu',e=>e.preventDefault());
   });
+  $('resetProgress').addEventListener('click',requestReset);
+  $('confirmReset').addEventListener('click',confirmReset);
+  $('cancelReset').addEventListener('click',()=>{$('resetDialog').close();$('resetProgress').focus()});
   $('pause').addEventListener('click',togglePause);
   $('sound').addEventListener('click',()=>{sound=GameAudio.setEnabled(!sound);$('sound').setAttribute('aria-pressed',String(sound));$('sound').setAttribute('aria-label',sound?'소리 끄기':'소리 켜기');$('sound').innerHTML=`♪ <span>${sound?'ON':'OFF'}</span>`;if(sound){tone(659,.1,'triangle');if(state==='playing')GameAudio.tick()}});
   $('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement){await document.exitFullscreen()}else if(document.querySelector('.arcade').requestFullscreen){await document.querySelector('.arcade').requestFullscreen()}else toast('이 브라우저에서는 기본 화면으로 플레이해 주세요.')}catch{toast('전체 화면을 지원하지 않는 브라우저예요.')}});
